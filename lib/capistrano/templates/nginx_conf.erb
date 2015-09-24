@@ -34,7 +34,7 @@ server {
   error_page 500 502 504 /500.html;
   error_page 503 @503;
 
-  server_name <%= :nginx_default_subdomain %>.<%= fetch(:nginx_server_name) %>;
+  server_name <%= fetch(:nginx_default_subdomain) %>.<%= fetch(:nginx_server_name) %>;
   root <%= current_path %>/public;
   try_files $uri/index.html $uri @puma_<%= fetch(:nginx_config_name) %>;
 
@@ -89,7 +89,7 @@ server {
 server {
     listen 80;
     server_name <%= fetch(:nginx_server_name) %>;
-    return 301 http://<%= :nginx_default_subdomain %>.<%= fetch(:nginx_server_name) %>$request_uri;
+    return 301 http://<%= fetch(:nginx_default_subdomain) %>.<%= fetch(:nginx_server_name) %>$request_uri;
 }
 
 <% unless fetch(:nginx_alias_domains).nil? %>
@@ -97,13 +97,13 @@ server {
 server {
     listen 80;
     server_name <%= domain %>;
-    return 301 http://<%= :nginx_default_subdomain %>.<%= fetch(:nginx_server_name) %>$request_uri;
+    return 301 http://<%= fetch(:nginx_default_subdomain) %>.<%= fetch(:nginx_server_name) %>$request_uri;
 }
 
 server {
     listen 80;
-    server_name <%= :nginx_default_subdomain %>.<%= domain %>;
-    return 301 http://<%= :nginx_default_subdomain %>.<%= fetch(:nginx_server_name) %>$request_uri;
+    server_name <%= fetch(:nginx_default_subdomain) %>.<%= domain %>;
+    return 301 http://<%= fetch(:nginx_default_subdomain) %>.<%= fetch(:nginx_server_name) %>$request_uri;
 }
 <% end %>
 <% end %>
