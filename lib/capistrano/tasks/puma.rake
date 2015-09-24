@@ -34,6 +34,8 @@ namespace :load do
     set :nginx_http_flags, -> { fetch(:nginx_flags) }
     set :nginx_socket_flags, -> { fetch(:nginx_flags) }
     set :nginx_use_ssl, false
+    set :nginx_default_subdomain, "www"
+    set :nginx_alias_domains, :nil
   end
 end
 
